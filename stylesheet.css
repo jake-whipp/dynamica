@@ -1,0 +1,43 @@
+body{
+    
+}
+
+.LogoHeader {
+    position: relative;
+    top:65px;
+    font-family: sans-serif;
+    font-size: 64pt;
+    color: lightskyblue;
+}
+
+.LoginContainer {
+    position:relative;
+    top:35px;
+    background-color:#e8e5e5;
+    border-style:solid;
+    border-color:lightgrey;
+    border-radius:25px;
+    width:350px;
+    height:400px;
+}
+
+.InputBox {
+    border-radius: 15px;
+    position: relative;
+    height: 40px;
+    width: 80%;
+    padding: 15px;
+    border-width: 0;
+    border: 1px solid lightskyblue;
+    border-color: rgba(0,0,0,0);
+    
+}
+
+.InputBox:focus {
+    border: 1px solid black;
+    transition: border 0.5s ease-out;
+}
+
+.gradient {
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1), rgba(0,0,0,0));
+}
