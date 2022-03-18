@@ -20,7 +20,8 @@ If php cannot connect to the MySQLi db, it is likely that the proper passwords h
 2. Update username and password to "root" in the config file
 3. Open shell/cmd
 4. Write `cd C:/xampp/mysql/bin`
-5. Write `mysql -u root`
+5. Write `mysql -u root` 
+
 6a. Write `UPDATE mysql.user SET Password=PASSWORD('MyPassword') WHERE User='root';` - update "MyPassword" to your password. If doesn't work, see 6b. If works, see 7.
 6b. Instead, write `ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyPassword';` - update "MyPassword" to your password.
 7. Write `flush privileges;`
