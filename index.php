@@ -6,7 +6,6 @@
 
     return $data;
     }
-
 ?>
 
 <html>
@@ -21,21 +20,13 @@
     </head>
 
     <body>
-        <?php 
-            if (isset($_GET["error"])) {
-                switch(SanitiseRequest($_GET["error"])) {
-                    case "1":
-                        echo "No username given!";
-                        break;
-                    case "2":
-                        echo "No password given!";
-                        break;
-                    default:
-                        break;
-                }
-            }; 
-        ?>
-        <center><h1 class="LogoHeader">dynamica</h1></center>
+        <center>
+            <div>
+                <h1 class="LogoHeader">dynamica</h1>
+                <h4 style="position: relative; font-family: sans-serif; left:100px; color:rgb(43, 144, 184); width:200px;">bringing people together</h4>
+            </div>
+        </center>
+       
 
         <center>
             <form method="post" action="login.php">
@@ -43,6 +34,21 @@
                     <h3 style="font-family: 'Roboto'; font-weight:400;">Login</h3>
                     <hr style="width:85%; height:1px; border: 0;" class="gradient" />
                     
+                    <?php 
+                        if (isset($_GET["error"])) {
+                            switch(SanitiseRequest($_GET["error"])) {
+                                case "1":
+                                    echo "<p style='color:red; padding:0; margin:0; position:relative; max-height:0px; font-weight:600;'>No username given!</p>";
+                                    break;
+                                case "2":
+                                    echo "<p style='color:red; padding:0; margin:0; position:relative; max-height:0px; font-weight:600;'>No password given!</p>";
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }; 
+                    ?>
+
                     <div style="position:relative; top:20px; font-family:Roboto; font-weight:300;">
                         <p style="position:relative; right:95px; top:5px;">Username</p>
                         <input id="UsernameBox" name="Username" type="text" class="InputBox" style="outline:none;" placeholder="Enter your username" />
@@ -56,8 +62,12 @@
                     <div style="position:relative; top:80px;">
                         <input type="submit" value="Submit" class="InputButton"/>
                     </div>
-                    
                 </div>
+
+                <div style="position:absolute; bottom:0; width:99%; padding:0; margin:0;">
+                    <p style="font-family:Roboto; font-weight:300;">no account? <a href="register.php">register</a></p> 
+                </div>
+                
             </form>
         </center>
     </body>
