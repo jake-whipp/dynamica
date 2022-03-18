@@ -12,7 +12,7 @@ School CS project for emulated social media platform. Built in HTML, CSS, PHP, a
 5. Explore the website!
 
 
-##### additional info
+## troubleshooting
 
 If php cannot connect to the MySQLi db, it is likely that the proper passwords have not been set. To fix this:
 
