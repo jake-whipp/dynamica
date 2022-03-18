@@ -16,7 +16,7 @@ School CS project for emulated social media platform. Built in HTML, CSS, PHP, a
 
 If php cannot connect to the MySQLi db, it is likely that the proper passwords have not been set. To fix this:
 
-1. Navigate to C:/xampp/phpmyadmin/config.inc.php
+1. Navigate to `C:/xampp/phpmyadmin/config.inc.php`
 2. Update username and password to "root" in the config file
 3. Open shell/cmd
 4. Write `cd C:/xampp/mysql/bin`
