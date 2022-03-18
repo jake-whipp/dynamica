@@ -43,6 +43,8 @@
                                 case "2":
                                     echo "<p style='color:red; padding:0; margin:0; position:relative; max-height:0px; font-weight:600;'>No password given!</p>";
                                     break;
+                                case "3":
+                                    echo "<p style='color:red; padding:0; margin:0; position:relative; max-height:0px; font-weight:600;'>Username or password is incorrect!</p>";
                                 default:
                                     break;
                             }
