@@ -16,6 +16,7 @@ function LoginToggle() {
         if (state) {
             $("body").animate({backgroundColor: "#1569C7;"}, "slow");
             $(".Motto").animate({color: "white"}, "slow");
+            $("#ToggleLogRegText").animate({color: "white"}, "slow");
 
             $(".InputButton").val("Create");
 
@@ -31,6 +32,7 @@ function LoginToggle() {
 
             $("body").animate({backgroundColor: "white;"}, "slow");
             $(".Motto").animate({color: "rgb(43, 144, 184);"}, "slow");
+            $("#ToggleLogRegText").animate({color: "black"}, "slow");
 
             $(".InputButton").val("Submit");
 
