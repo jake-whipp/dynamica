@@ -1,5 +1,5 @@
 # dynamica
-School CS project for emulated social media platform. Built in HTML, CSS, JQuery, PHP, and MySQL.
+My School CS project for an emulated social media platform. Built in HTML, CSS, JQuery, PHP, and MySQL.
 
 
 ## instructions
