@@ -92,7 +92,7 @@ Dynamica - Jacob Whipp (2022).
                 </div>
 
                 <div style="position:absolute; bottom:0; width:99%; padding:0; margin:0;">
-                    <p style="font-family:Roboto; font-weight:300;">no account? <a class="ToggleLogReg" href="#">register</a></p> 
+                    <p id="ToggleLogRegText" style="font-family:Roboto; font-weight:300;">no account? <a class="ToggleLogReg" href="#">register</a></p> 
                 </div>
                 
             </form>
