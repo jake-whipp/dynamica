@@ -18,6 +18,15 @@ Dynamica - Jacob Whipp (2022).
     }
 ?>
 
+<?php
+    session_start();
+
+    if (isset($_SESSION["AUTHID"])){
+        header("Location: " . "/dashboard.php");
+        die();
+    }
+?>
+
 <html>
     
     <head>
@@ -97,6 +106,8 @@ Dynamica - Jacob Whipp (2022).
                         <input type="submit" value="Submit" class="InputButton"/>
                     </div>
                 </div>
+
+                
 
                 <div style="position:absolute; bottom:0; width:99%; padding:0; margin:0;">
                     <p id="ToggleLogRegText" style="font-family:Roboto; font-weight:300;">no account? <a class="ToggleLogReg" href="#">register</a></p> 
