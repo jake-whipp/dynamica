@@ -22,17 +22,22 @@ Dynamica - Jacob Whipp (2022).
     }
 
     if (empty(SanitiseRequest($_POST["Username"]))) {
-        header('Location: ' . "/dynamica-main/index.php?error=1", true);
+        header('Location: ' . "/index.php?error=1", true);
         die();
-    }
+    } elseif (empty(SanitiseRequest($_POST["Password"]))) {
+        header('Location: ' . "/index.php?error=2", true);
+        die();
+    } 
+    
+    $alnumUser = ctype_alnum(SanitiseRequest($_POST["Username"]));
 
-    if (empty(SanitiseRequest($_POST["Password"]))) {
-        header('Location: ' . "/dynamica-main/index.php?error=2", true);
+    if (!($alnumUser)) {
+        header('Location: ' . "/index.php?error=4", true);
         die();
     }
 
     $servername = "localhost";
-    $username = "root";
+    $username = "root"; // login details for sql. NOT username logon
     $password = "root";
     $dbname = "dynamica";
 
@@ -45,16 +50,27 @@ Dynamica - Jacob Whipp (2022).
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO users (Username, Password) VALUES ('" . SanitiseRequest($_POST["Username"]) . "', '" . SanitiseRequest($_POST["Password"]) . "')";
+    // Check for existing user
+    $sqlSearchExistingAccounts = "SELECT * FROM users WHERE Username='" . SanitiseRequest($_POST["Username"]) . "';";
+    $result = $conn->query($sqlSearchExistingAccounts);
+
+    if ($result->num_rows > 0) {
+        header('Location: ' . "/index.php?error=5", true);
+        die();
+    }
+
+    // Create a new account
+    $sqlCreateNewAccount = "INSERT INTO users (Username, Password) VALUES ('" . SanitiseRequest($_POST["Username"]) . "', '" . SanitiseRequest($_POST["Password"]) . "');";
 
     if ($conn->query($sql) === TRUE) {
         echo "New account created successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        header('Location: ' . "/index.php?error=0", true);
+        die();
     }
 
     $conn->close();
 
-    header("Location: " . "/dynamica-main/dashboard.php");
+    header("Location: " . "/dashboard.php");
     die();
 ?>
