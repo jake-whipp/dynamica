@@ -26,12 +26,12 @@ Dynamica - Jacob Whipp (2022).
     }
 
     if (empty(SanitiseRequest($_POST["Username"]))) {
-        header('Location: ' . "/dynamica-main/index.php?error=1", true);
+        header('Location: ' . "/index.php?error=1", true);
         die();
     }
 
     if (empty(SanitiseRequest($_POST["Password"]))) {
-        header('Location: ' . "/dynamica-main/index.php?error=2", true);
+        header('Location: ' . "/index.php?error=2", true);
         die();
     }
 
@@ -70,7 +70,7 @@ Dynamica - Jacob Whipp (2022).
         echo "Error: " . mysqli_error($conn);
     }
     
-    
+
     $conn->close();
 
     header("Location: " . "/dashboard.php");
