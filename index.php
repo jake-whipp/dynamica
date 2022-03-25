@@ -70,6 +70,13 @@ Dynamica - Jacob Whipp (2022).
                                     break;
                                 case "3":
                                     echo "<p class='ErrorMessage'>Username or password is incorrect!</p>";
+                                    break;
+                                case "4":
+                                    echo "<p class='ErrorMessage'>Please only use characters a-z, A-Z, or numbers 0-9!</p>";
+                                    break;
+                                case "5":
+                                    echo "<p class='ErrorMessage'>Username already exists!</p>";
+                                    break;
                                 default:
                                     break;
                             }
