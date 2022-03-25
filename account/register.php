@@ -62,7 +62,7 @@ Dynamica - Jacob Whipp (2022).
     // Create a new account
     $sqlCreateNewAccount = "INSERT INTO users (Username, Password) VALUES ('" . SanitiseRequest($_POST["Username"]) . "', '" . SanitiseRequest($_POST["Password"]) . "');";
 
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->query($sqlCreateNewAccount) === TRUE) {
         echo "New account created successfully";
     } else {
         header('Location: ' . "/index.php?error=0", true);
