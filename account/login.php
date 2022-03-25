@@ -46,24 +46,33 @@ Dynamica - Jacob Whipp (2022).
 
     // Check connection
     if (mysqli_connect_error()) {
-        header('Location: ' . "/dynamica-main/index.php?error=0", true);
+        header('Location: ' . "/index.php?error=0", true);
         die("Database connection failed: " . mysqli_connect_error());
     }
+
+
+    // Run an SQL query e.g. "SELECT * FROM users WHERE Username='admin' AND Password='root'
+    $sql = "SELECT * 
+            FROM users 
+            WHERE Username='" . SanitiseRequest($_POST["Username"]) . "' 
+            AND BINARY Password='" . SanitiseRequest($_POST["Password"]) . "'"; // BINARY enables case-sensitive search
     
-    $sql = "SELECT * FROM users WHERE Username='" . SanitiseRequest($_POST["Username"]) . "' AND Password='" . SanitiseRequest($_POST["Password"]) . "';"; // e.g. "SELECT * FROM users WHERE Username='admin' AND Password='root';
+
+    // Store results in a variable
     $result = $conn->query($sql);
 
     if ($result != false) {
         if ($result->num_rows != 1) {
-            header('Location: ' . "/dynamica-main/index.php?error=3", true);
+            header('Location: ' . "/index.php?error=3", true);
             die();
         }
     } else {
         echo "Error: " . mysqli_error($conn);
     }
     
-
+    
     $conn->close();
 
-    echo "<h1> Welcome, " . SanitiseRequest($_POST["Username"]) . "!</h1>";
+    header("Location: " . "/dashboard.php");
+    die();
 ?>
