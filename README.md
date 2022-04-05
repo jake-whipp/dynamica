@@ -24,3 +24,24 @@ If php cannot connect to the MySQLi db, it is likely that the proper passwords h
 6. Write `UPDATE mysql.user SET Password=PASSWORD('MyPassword') WHERE User='root';` - update "MyPassword" to your password. If works, skip to 8. If doesn't work, see 7. 
 7. Instead, write `ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyPassword';` - update "MyPassword" to your password.
 8. Write `flush privileges;`
+
+
+## extra config
+
+`C:\Windows\System32\drivers\etc`
+hosts --> new domains
+
+
+`c:\xampp\apache\conf\extra`
+httpd-vhosts.conf --> new domains
+
+
+`c:\xampp\apache\conf\`
+httpd.conf --> :
+
+<Directory "C:/xampp/htdocs/dynamica-main/">
+    Options -Indexes +FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+</Directory>
