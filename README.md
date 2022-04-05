@@ -28,12 +28,28 @@ If php cannot connect to the MySQLi db, it is likely that the proper passwords h
 
 ## extra config
 
+Some extra things may have to be set up for the same server experience as on my home PC
+
 `C:\Windows\System32\drivers\etc`
-hosts --> new domains
+hosts --> :
+
+```
+# localhost name resolution is handled within DNS itself.
+	127.0.0.1       localhost
+	::1             localhost
+	127.0.0.1		dynamica.com
+```
 
 
 `c:\xampp\apache\conf\extra`
-httpd-vhosts.conf --> new domains
+httpd-vhosts.conf --> :
+
+```
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/dynamica-main/"
+    ServerName dynamica.com
+</VirtualHost>
+```
 
 
 `c:\xampp\apache\conf\`
