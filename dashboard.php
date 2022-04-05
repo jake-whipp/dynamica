@@ -8,6 +8,7 @@ Dynamica - Jacob Whipp (2022).
 
 -->
 
+
 <?php
     session_start();
     $timeout = 900; // how long can the user remain active
@@ -72,7 +73,6 @@ Dynamica - Jacob Whipp (2022).
     }
 
 
-
     if (ValidateSession()) {
         UpdateSession();
     } else {
@@ -88,11 +88,15 @@ Dynamica - Jacob Whipp (2022).
         <center>
             <div>
                 <?php
-                    echo "<h1>Hello, " . $_SESSION["AUTHID"] . "!</h1>";
+                    echo "<h1>Hello, " . substr($_SESSION["AUTHID"], 0, strpos($_SESSION["AUTHID"], "_")) . "!</h1>";
                 ?>
             </div>
 
-            <form action="account/logout.php">
+            <form action="/users/search.php">
+                <input type="submit" value="Users"/>
+            </form>
+
+            <form action="/account/logout.php">
                 <input type="submit" value="Logout"/>
             </form>
         </center>
