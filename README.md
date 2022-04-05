@@ -39,9 +39,11 @@ httpd-vhosts.conf --> new domains
 `c:\xampp\apache\conf\`
 httpd.conf --> :
 
+```
 <Directory "C:/xampp/htdocs/dynamica-main/">
     Options -Indexes +FollowSymLinks
     AllowOverride All
     Order allow,deny
     Allow from all
 </Directory>
+```
