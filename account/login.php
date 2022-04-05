@@ -9,6 +9,7 @@ Dynamica - Jacob Whipp (2022).
 -->
 
 
+
 <?php
     session_start();
     $timeout = 900; // how long can the user remain active
@@ -60,7 +61,7 @@ Dynamica - Jacob Whipp (2022).
         }
     }
 
-    
+
     // Establish login details for sql. NOT username logon
     $servername = "localhost";
     $username = "root";
@@ -110,7 +111,6 @@ Dynamica - Jacob Whipp (2022).
                 die();
             }
         } else {
-            echo "Error: " . mysqli_error($conn);
             header('Location: ' . "/index.php?error=0", true);
             die();
         }
