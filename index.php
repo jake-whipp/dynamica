@@ -9,6 +9,7 @@ Dynamica - Jacob Whipp (2022).
 -->
 
 <?php
+
     function SanitiseRequest($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -37,7 +38,7 @@ Dynamica - Jacob Whipp (2022).
 
 
         <!-- Link to style sheet -->
-        <link rel="stylesheet" href="styles/stylesheet.css" /> 
+        <link rel="stylesheet" href="styles/index.css" /> 
 
 
         <!-- JQuery and JQuery UI CDN hosted libraries -->
@@ -54,7 +55,7 @@ Dynamica - Jacob Whipp (2022).
         <center>
             <div>
                 <h1 class="Logo" style="top:65px;">dynamica</h1>
-                <h4 class="Motto">bringing people together</h4>
+                <h4 class="Motto">bringing employees together</h4>
             </div>
         </center>
        
@@ -63,7 +64,7 @@ Dynamica - Jacob Whipp (2022).
             <form id="LoginForm" method="post" action="account/login.php">
                 <div class="LoginContainer">
                     <h3 id="LoginHeader" style="font-family: 'Roboto'; font-weight:400;">Login</h3>
-                    <hr style="width:85%; height:1px; border: 0;" class="gradient" />
+                    <hr style="width:85%; height:1px; border: 0;" class="hrgradient" />
                     
                     <?php 
                         if (isset($_GET["error"])) {
@@ -107,11 +108,13 @@ Dynamica - Jacob Whipp (2022).
                     </div>
                 </div>
 
+
+                <div style=" width:99%; padding:0; margin-top:260;">
+                    <p id="ToggleLogRegText" style="font-family:Roboto; font-weight:300; display:inline-block; margin-right:5px;">no account? </p> 
+                    <a class="ToggleLogReg" href="#" style="font-family:Roboto; font-weight:300; display:inline-block;">register</a>
+                </div>
                 
 
-                <div style="position:absolute; bottom:0; width:99%; padding:0; margin:0;">
-                    <p id="ToggleLogRegText" style="font-family:Roboto; font-weight:300;">no account? <a class="ToggleLogReg" href="#">register</a></p> 
-                </div>
                 
             </form>
         </center>
