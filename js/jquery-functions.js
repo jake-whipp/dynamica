@@ -17,6 +17,9 @@ function LoginToggle() {
             $("body").animate({backgroundColor: "#1569C7;"}, "slow");
             $(".Motto").animate({color: "white"}, "slow");
             $("#ToggleLogRegText").animate({color: "white"}, "slow");
+            
+            $("#ToggleLogRegText").text("already signed up?");
+            $(".ToggleLogReg").text("log in");
 
             $(".InputButton").val("Create");
 
@@ -33,6 +36,9 @@ function LoginToggle() {
             $("body").animate({backgroundColor: "white;"}, "slow");
             $(".Motto").animate({color: "rgb(43, 144, 184);"}, "slow");
             $("#ToggleLogRegText").animate({color: "black"}, "slow");
+
+            $("#ToggleLogRegText").text("no account?");
+            $(".ToggleLogReg").text("register");
 
             $(".InputButton").val("Submit");
 
