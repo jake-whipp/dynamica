@@ -1,103 +1,27 @@
-<!-- dashboard.php
+<!-- browse.php
 -----------------------
 
-Main page for dynamica.
-Serves as the home page a user will see after logging in.
+Browsing page for dynamica.
+Serves as the page to view all other users' posts.
 
 Dynamica - Jacob Whipp (2022).
 
 -->
 
 
-<?php
-    session_start();
-    $config = parse_ini_file($_SERVER["DOCUMENT_ROOT"] . "/config.ini", true);
-    $timeout = $config["auth"]["timeout"]; // how long can the user remain active
-
-    function SanitiseRequest($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-
-    return $data;
-    }
-
-    function CreateSession($auth_cookie_name, $auth_cookie_value, $auth_cookie_expiry) {
-        global $timeout;
-        $auth_cookie_created = time();
-
-        setcookie($auth_cookie_name, $auth_cookie_value, $auth_cookie_expiry, "/"); // Accessed with superglobal $_COOKIE["AUTHCOOKIE"];
-
-
-        // Declare session variables to create a server-client pair
-        $_SESSION["AUTHID"] = $auth_cookie_value;
-        $_SESSION["AUTHEXPIRY"] = $auth_cookie_expiry;
-        $_SESSION["AUTHCREATED"] = $auth_cookie_created;
-    }
-
-    function DestroySession() {
-        CreateSession("AUTHCOOKIE", "",(time() - 3600));
-
-        session_unset();
-        session_destroy();
-    }
-
-    function ValidateSession() {
-        if (isset($_SESSION["AUTHEXPIRY"])) {
-            if (time() - $_SESSION["AUTHEXPIRY"] > 0) {
-                // extra time has passed since the expiry date of the auth session
-                DestroySession();
-
-                return 0;
-            } else {
-                if ($_COOKIE["AUTHCOOKIE"] == $_SESSION["AUTHID"]) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            }
-        } else {
-            return 0;
-        }
-    }
-
-    function UpdateSession() {
-        global $timeout;
-
-        if (!isset($_SESSION["AUTHCREATED"])) {
-            CreateSession("AUTHCOOKIE", (SanitiseRequest($_POST["Username"]) . "_" . random_int(1000000, 2000000)), (time() + $timeout));
-        } else {
-            session_regenerate_id(true);
-            $_SESSION["AUTHCREATED"] = time();
-            $_SESSION["AUTHEXPIRY"] = time() + $timeout;
-        }
-    }
-
-
-    if (ValidateSession()) {
-        UpdateSession();
-    } else {
-        DestroySession();
-        header('Location: ' . "/index.php?error=1");
-        die();
-    }
-    
-?>
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/account/validate.php"); // Run the code that establishes client cookie and server session pairs ?>
 
 <html>
     <head>
         <!-- Link to style sheet -->
-        <link rel="stylesheet" href="/styles/index.css" /> 
-        <link rel="stylesheet" href="/styles/main.css" /> 
-        <link rel="stylesheet" href="/styles/user_profile.css" /> 
+        <link rel="stylesheet" href="/css/index.css" /> 
+        <link rel="stylesheet" href="/css/main.css" /> 
 
         <!-- JQuery and JQuery UI CDN hosted libraries -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-        <!-- linking JQuery module and scripts -->
-        <script src="/js/jquery-functions.js"></script>
 
         <?php
                 // Establish login details for sql. NOT username logon
@@ -170,7 +94,7 @@ Dynamica - Jacob Whipp (2022).
 
             <form action="/account/logout.php" class="HeaderElement" style="display:inline-block; float:right; left:-30px;">
                 <input type="Submit" value="Logout" class="HeaderElement" style="width:100px; height:50px; position:relative;"/>
-                <img src="/logout.png" style="position:relative; right:25px; bottom:36px;"/>
+                <img src="/images/logout.png" style="position:relative; right:25px; bottom:36px;"/>
             </form>
         </div>
 
@@ -183,8 +107,8 @@ Dynamica - Jacob Whipp (2022).
         </div>
         </center>
 
-        <div class="ProfileContainer" id="ProfilePostContainer" style="width:1050px; height:740px; position:relative; left:50%; transform: translate(-50%, 0%);">
-            <div class="PostContainer" id="PostConstructor" style="width:95%; height:100px; position:relative; left:50%; transform: translate(-50%, 0%); margin-top:20px;">
+        <div class="Container" id="ProfilePostContainer" style="width:1050px; height:740px; position:relative; left:50%; transform: translate(-50%, 0%);">
+            <div class="SubContainer" id="PostConstructor" style="width:95%; height:100px; position:relative; left:50%; transform: translate(-50%, 0%); margin-top:20px;">
                 <div class="PostPhoto" style="width:80px; height:50%; display:inline-block; vertical-align:middle; margin-right:20px; margin-left:25px; position:fixed; top:10px">
                     <img src="" style="object-fit: cover; width: 100%; height:80px; position:relative;border-radius:25px;"/>
                 </div>
@@ -199,7 +123,7 @@ Dynamica - Jacob Whipp (2022).
             </div>
 
         <script>
-            var profile_element = $(".PostContainer");
+            var profile_element = $(".SubContainer");
 
             <?php
                 while($postRow = $postsResult->fetch_assoc()) {  // Step through all of the post records gathered in the <head> of page
@@ -217,7 +141,10 @@ Dynamica - Jacob Whipp (2022).
                     
 
                     $clone.children("div.PostContent").children("p.PostDate").text("<?=$postRow["Created"] ?>"); // edit
-                    $clone.children("div.PostContent").children("p.PostBodyText").text("<?=$postRow["Content"] ?>");
+                    <?php
+                        $PostContent = preg_replace("/&#?[a-z0-9]+;/i","",$postRow["Content"]); 
+                    ?>
+                    $clone.children("div.PostContent").children("p.PostBodyText").text("<?=$PostContent?>");
 
                     $clone.children("div.PostPhoto").children("img").attr("src", "<?=$profileResult["Photosrc"]?>");
 
